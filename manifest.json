@@ -1,13 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Tab Hopper",
-  "version": "1.0",
+  "description": "Tab Hopper makes switching between tabs faster and easier.",
+  "version": "2.5",
   "permissions": [
     "scripting", 
     "activeTab", 
     "tabs", 
     "storage"
   ],
+  "icons": {
+    "16": "Icon.png",
+    "48": "Icon.png",
+    "128": "Icon.png"
+
+  },
   "action": {
     "default_title": "Open Modal"
   },

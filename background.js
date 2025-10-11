@@ -1,10 +1,15 @@
 let tabScreenshots = {};
+let lastActiveTabId = null;
+
 chrome.action.onClicked.addListener((tab) => {
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: showModal
   });
 });
+
+
+
 chrome.runtime.onStartup.addListener(()=> {
   chrome.storage.local.remove("tabScreenshots", () => {
   console.log("All tab data removed");
@@ -13,15 +18,22 @@ chrome.runtime.onStartup.addListener(()=> {
 
 
 
-
-
-
-
-
-
 chrome.tabs.onRemoved.addListener((tabid, removedInfo) => {
   delete tabScreenshots[tabid];
 });
+
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  if (lastActiveTabId !== null && lastActiveTabId !== activeInfo.tabId) {
+    chrome.scripting.executeScript({
+      target: {tabId: lastActiveTabId},
+      func: removeModal
+    });
+  }
+  lastActiveTabId = activeInfo.tabId;
+ 
+});
+
+
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message === "get-tabs") {
@@ -63,13 +75,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           favIconUrl: currentTab.favIconUrl,
           image: res
         };
-
+        lastActiveTabId = currentTab.id;
         sendResponse(tabData);
       });
     });
     return true;
   }
   if (message.action === "switch-tab" && message.tabId) {
+      lastActiveTabId = message.tabId;
       chrome.tabs.update(message.tabId, { active: true });
     return true;
   }
@@ -89,7 +102,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 }
 });
 
+
+
 function showModal() {
   // Trigger the modal from the content script
   window.dispatchEvent(new CustomEvent("open-modal-box"));
+}
+
+function removeModal() {
+  window.dispatchEvent(new CustomEvent("close-modal"));
 }

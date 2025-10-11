@@ -1,9 +1,21 @@
 let tabScreenshots = {};
 let currentTabId = null;
+let isOpen = false; 
+const modal = document.createElement("div");
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key.toLocaleLowerCase() == 'b') {
+    createModal()
+  }
+})
+function removeModal() {
+  isOpen = false; 
+  modal.remove();
+}
 function createModal() {
+  isOpen = true; 
   if (document.getElementById("extension-modal")) return;
 
-  const modal = document.createElement("div");
   
   modal.id = "extension-modal";
   modal.innerHTML = `
@@ -18,36 +30,11 @@ function createModal() {
   document.body.appendChild(modal);
 
   modal.addEventListener("click", () => {
+    isOpen = false;
     modal.remove();
+
   })
 
-  // chrome.storage.local.get("tabScreenshots", (data) => {
-  //    const container = modal.querySelector(".active-tab-container");
-  //    const tabData = data.tabScreenshots;
-
-  //    if (!tabData) {
-  //     return;
-  //    }
-  //    for (const tabid in tabData) {
-  //     const tab = tabData[tabid];
-  //     const li = document.createElement("li");
-  //     li.className = "tab-container"
-  //     const image = document.createElement("img");
-  //     if (tab.image) {
-  //     image.src = tab.image;
-  //     }
-  //     else {
-  //       image.alt = "loading preview...";
-  //     }
-      
-
-
-  //     li.append(image);
-  //     container.append(li);
-
-  //    }
-
-  // });
   chrome.runtime.sendMessage("get-tabs", (tabs) => {
     const container = modal.querySelector(".active-tab-container");
     
@@ -94,6 +81,8 @@ function createModal() {
       li.addEventListener("click", () => {
         chrome.runtime.sendMessage({action: "switch-tab", tabId: tab.id});
         modal.remove();
+        isOpen = false; 
+
       });
       closebtn.addEventListener("click", () => {
           chrome.runtime.sendMessage({
@@ -101,6 +90,8 @@ function createModal() {
             tabId: tab.id,
             source: currentTabId
           });
+          isOpen = false;
+
       })
       });
     });
@@ -113,6 +104,7 @@ function createModal() {
 
 
 function takeScreenshot() {
+  if (isOpen === false) {
  chrome.runtime.sendMessage("screenshot-tab", (tabData) => {
  if (!tabData) {
       console.warn("Failed to capture tab data");
@@ -135,11 +127,13 @@ function takeScreenshot() {
 
   });
 });
+
+  }
 }
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === "reopen-modal") {
-    createModal(); // Now it reopens
+    createModal(); 
   }
 });
 
@@ -148,11 +142,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 /**
  * Call on background to take a screenshot of the current tab user is on
  */
-
 takeScreenshot();
 
+  window.setInterval(() => {
+    if (isOpen == false) {
+      takeScreenshot();
+    }
+  },  200);
 
-window.setInterval(takeScreenshot, 30);
+
 
 // Listen for custom event
 window.addEventListener("open-modal-box", createModal);
+window.addEventListener("close-modal", removeModal);

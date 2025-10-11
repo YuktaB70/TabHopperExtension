@@ -1,5 +1,4 @@
-
-.modal-overlay {
+#extension-modal .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,45 +9,44 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
+
 }
 
-.modal-content {
+#extension-modal .modal-content {
   position:relative;
-  display: flex;
-  flex-direction: column;
-  flex-direction: column;
   background: rgb(56, 56, 56);
   padding: 20px 30px;
   border-radius: 10px;
-  width: 850px;
-  height: 600px;
+  width: 60%;
+  height: 80%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+
+
 }
 
 
 
-
-.active-tab-container {
+#extension-modal .active-tab-container {
   display:flex;
   flex-direction: row;
   list-style: none;
   flex-wrap: wrap;
   position: relative;
+  justify-content: center;
+  align-items: flex-start;
   background-color: transparent;
-  max-width: 850px;
-  max-height: 600px;
-  margin: 0 1.5% 0 1.5%;
-  padding: 20px 10px 20px 10px;
-  justify-content: flex-start;
-  gap: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;  
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y:auto;
 }
 
-.active-tab-container::-webkit-scrollbar {
-  display: none;
-}
-.tab-container {
+
+#extension-modal .tab-container {
   display: flex;
   flex-direction: column;
   background-color: transparent;
@@ -60,19 +58,19 @@
 
 }
 
-.tab-container:hover {
+#extension-modal .tab-container:hover {
   background-color: gray ;
 }
 
-.tab-container:hover .close-btn {
+#extension-modal .tab-container:hover .close-btn {
   color: black;
 }
 
-.tab-container:hover .url {
+#extension-modal .tab-container:hover .url {
   color: black;
 }
 
-.tab-container img {
+#extension-modal .tab-container img {
   width: 250px;
   height: 150px;
   object-fit:fill;
@@ -84,7 +82,7 @@
 }
 
 
-.tab-url-container {
+#extension-modal .tab-url-container {
   display: flex;
   justify-content: space-between;
   height: 25px;
@@ -94,7 +92,7 @@
 }
 
 
-.url {
+#extension-modal .url {
   font-size: 10px;
   color:transparent;
   white-space: nowrap;
@@ -105,7 +103,7 @@
 }
 
 
-.close-btn {
+#extension-modal .close-btn {
   cursor: pointer;
   color: transparent;
   font-size: 30px;
@@ -113,11 +111,11 @@
 
 }
 
-.tab-container:hover .close-btn:hover {
+#extension-modal .tab-container:hover .close-btn:hover {
   color: rgb(85, 85, 85);
 }
 
-.no-preview {
+#extension-modal .no-preview {
   background: rgb(117, 117, 117);;
   width: 250px;
   height: 150px;
@@ -130,7 +128,7 @@
 
 }
 
-.no-preview h1 {
+#extension-modal .no-preview h1 {
   color: rgb(65, 65, 65);
   font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
