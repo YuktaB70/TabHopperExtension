@@ -28,7 +28,7 @@ jobs:
           zip -r dist/extension.zip . -x '*.git*' 'node_modules/*' '.github/*'
 
       - name: Upload to Chrome Web Store
-        uses: Klemensas/chrome-extension-upload-action@v1.4.0
+        uses: Klemensas/chrome-extension-upload-action@v1.3
         with:
           refresh-token: ${{ secrets.REFRESH_TOKEN }} 
           client-id: ${{ secrets.CLIENT_ID }}
