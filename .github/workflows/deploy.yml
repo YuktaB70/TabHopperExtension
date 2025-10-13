@@ -3,12 +3,12 @@ name: Build and Deploy Chrome Extension
 on: 
   push:  
     branches:
-      ~ main
+      - main
   workflow_dispatch:      #Allows manual trigger in GitHub Actions. Must be triggered manually
 
 jobs: 
   build-and-deploy:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -32,8 +32,8 @@ jobs:
         with:
           refresh-token: ${{ secrets.REFRESH_TOKEN }} 
           client-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET}}
-          extension-id: ${{ secrets.EXTENSION_ID}}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          extension-id: ${{ secrets.EXTENSION_ID }}
           zip-path: dist/extension.zip
 
       - name: Upload to Chrome Web Store
