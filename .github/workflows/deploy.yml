@@ -25,8 +25,8 @@ jobs:
           refresh-token: ${{ secrets.REFRESH_TOKEN }} 
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
-          extension-id: ${{ secrets.EXTENSION_ID }}
-          zip-path: dist/extension.zip
+          app-id: ${{ secrets.EXTENSION_ID }}
+          file-path: dist/extension.zip
 
       - name: Publish to Chrome Web Store
         run: |
