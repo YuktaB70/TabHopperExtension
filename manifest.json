@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Tab Hopper",
   "description": "Tab Hopper makes switching between tabs faster and easier.",
-  "version": "2.6",
+  "version": "2.7",
   "permissions": [
     "scripting", 
     "activeTab", 
