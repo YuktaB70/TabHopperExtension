@@ -28,7 +28,7 @@ jobs:
           extension-id: ${{ secrets.EXTENSION_ID }}
           zip-path: dist/extension.zip
 
-      - name: Upload to Chrome Web Store
+      - name: Publish to Chrome Web Store
         run: |
           curl -X POST \
           -H "Authorization: Bearer $(curl -s -X POST -d client_id=${{ secrets.CLIENT_ID }} -d client_secret=${{ secrets.CLIENT_SECRET }} -d refresh_token=${{ secrets.REFRESH_TOKEN }} -d grant_type=refresh_token https://accounts.google.com/o/oauth2/token | jq -r '.access_token')" \
