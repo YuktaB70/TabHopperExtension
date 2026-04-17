@@ -1,0 +1,31 @@
+{
+  "name": "tabhopperchromeextension",
+  "version": "1.0.0",
+  "description": "<br />",
+  "main": "background.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuktaB70/TabHopperExtension.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/YuktaB70/TabHopperExtension/issues"
+  },
+  "homepage": "https://github.com/YuktaB70/TabHopperExtension#readme",
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
+    "babel-jest": "^30.3.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0"
+  }
+}

@@ -7,9 +7,28 @@ on:
   workflow_dispatch:      #Allows manual trigger in GitHub Actions. Must be triggered manually
 
 jobs: 
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code  #download repo code onto github actions
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js #install node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' #specify node version
+          cache: 'npm'  #cache node_modules to speed up future runs
+
+      - name: Install dependencies #install npm dependencies for test environment
+        run: npm install
+
+      - name: Run tests #run jest tests
+        run: npm test #same way we do in terminal, we will run the command before we build and deploy
+
+
   build-and-deploy:
     runs-on: ubuntu-latest
-
+    needs: test 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
