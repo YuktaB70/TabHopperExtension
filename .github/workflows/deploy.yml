@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js #install node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' #specify node version
+          node-version: '22' #specify node version
           cache: 'npm'  #cache node_modules to speed up future runs
 
       - name: Install dependencies #install npm dependencies for test environment
