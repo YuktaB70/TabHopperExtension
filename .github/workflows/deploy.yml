@@ -17,10 +17,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22' #specify node version
-          cache: 'npx'  #cache node_modules to speed up future runs
+          cache: 'npm'  #cache node_modules to speed up future runs
 
       - name: Install dependencies #install npm dependencies for test environment
-        run: npm install
+        run: npm ci
 
       - name: Run tests #run jest tests
         run: npm test #same way we do in terminal, we will run the command before we build and deploy
