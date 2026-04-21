@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test:ci": "jest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
